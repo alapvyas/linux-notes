@@ -146,3 +146,69 @@ Kubernetes comes with a few default namespaces that are used for different purpo
 - **Usage**: It helps the Kubernetes scheduler in determining node availability and managing node lifecycles more efficiently.
 - **Consideration**: This namespace is specifically for system use and typically doesn't require user intervention.
 
+## Kubernetes Ingress Explained  
+
+### Overview
+- **Purpose**: Kubernetes Ingress is used to manage external access to the services in a Kubernetes cluster.
+- **Functionality**: It primarily handles HTTP and HTTPS traffic routing to different services based on the incoming URL.
+
+### Key Components
+1. **Ingress Resources**: Define rules for traffic routing.
+2. **Ingress Controller**: A pod that implements the rules set in the Ingress, typically using a load balancer or a reverse proxy.
+3. **Annotations**: Used to customize behavior of Ingress, depending on the Ingress controller.
+
+### How It Works
+- **Routing Traffic**: Routes external requests to the appropriate services based on the defined rules.
+- **Load Balancing**: Can provide load balancing, SSL termination, and name-based virtual hosting.
+
+## Advantages
+- **Centralized Management**: Offers a single resource to manage access to multiple services.
+- **Scalability**: Facilitates scaling of web applications.
+- **Security**: Can be configured to give services externally-reachable URLs, load balance traffic, terminate SSL, and offer name-based virtual hosting.
+
+### Use Cases
+- **Single Service Access**: Expose a single service for a web application.
+- **Path-Based Routing**: Route traffic to different services based on the URL path.
+- **Name-Based Virtual Hosting**: Host multiple domains using a single IP address.
+
+### Implementation
+- **Define Ingress Resource**: Create a YAML file to define the Ingress resource with the desired rules.
+- **Deploy Ingress Controller**: Choose and deploy an Ingress controller like NGINX or Traefik.
+- **Apply Ingress Resource**: Apply the Ingress resource to your Kubernetes cluster using `kubectl apply`.
+
+### Limitations
+- **Dependency on Ingress Controller**: Requires a specific Ingress controller to be deployed in the cluster.
+- **Complex Configurations**: Complex routing logic might require additional configurations or custom annotations.
+
+## Deploying resources through Helm
+
+Helm is a package manager for Kubernetes (similar to OS package managers like yum or apt in Linux or homebrew in MacOS).
+
+Helm is comprised of two things:
+
+    A helm CLI tool (the client).
+    Tiller, a server component running as a Pod inside the Kubernetes cluster.
+
+Those two components are used to deploy and manage application packages in a Kubernetes cluster. Helm application packages are called Charts. They’re combined with a Config, which contains configuration information and is merged into a Chart to create a Release, which is a running instance of an application (a combined Chart and Config). You deploy and manage Releases using the helm CLI tool, which talks to the Tiller server, which is the component that creates all the necessary Kubernetes resources defined in the Chart, 
+
+## Volumes: 
+
+Kubernetes volumes are a component of a pod and are thus defined in the pod’s specification—much like containers. They aren’t a standalone Kubernetes object and cannot be created or deleted on their own. A volume is available to all containers in the pod, but it must be mounted in each container that needs to access it. In each container, you can mount the volume in any location of its filesystem.
+
+**emptyDir**—A simple empty directory used for storing transient data.
+
+**hostPath**—Used for mounting directories from the worker node’s filesystem into the pod.
+
+**gitRepo**—A volume initialized by checking out the contents of a Git repository.
+
+**nfs**—An NFS share mounted into the pod.
+
+**gcePersistentDisk (Google Compute Engine Persistent Disk), awsElasticBlockStore (Amazon Web Services Elastic Block Store Volume), azureDisk (Microsoft Azure Disk Volume)**—Used for mounting cloud provider-specific storage.
+
+**cinder, cephfs, iscsi, flocker, glusterfs, quobyte, rbd, flexVolume, vsphere**-Volume, photonPersistentDisk, scaleIO—Used for mounting other types of network storage.
+
+**configMap, secret, downwardAPI**—Special types of volumes used to expose certain Kubernetes resources and cluster information to the pod.
+
+**persistentVolumeClaim**—A way to use a pre- or dynamically provisioned persistent storage. 
+
+Using PersistentVolumes and PersistentVolumeClaims makes it easy to obtain persistent storage without the user having to deal with the actual storage technology used underneath. But this still requires a cluster administrator to provision the actual storage up front. Kubernetes can also perform this job automatically through dynamic provisioning of PersistentVolumes. You can deploy a PersistentVolume provisioner and define one or more StorageClass objects to let users choose what type of PersistentVolume they want. The users can refer to the StorageClass in their PersistentVolumeClaims and the provisioner will take that into account when provisioning the persistent storage.
