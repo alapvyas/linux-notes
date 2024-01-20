@@ -241,6 +241,6 @@ Kubernetes Services are an abstract way to expose an application running on a se
 
 ### Different Service Types:
 	
--**ClusterIP:** Exposes the Service on a cluster-internal IP. This type makes the Service only reachable from within the cluster.
--**NodePort:** Exposes the Service on each Node's IP at a static port. A ClusterIP Service is created automatically, and the NodePort Service will route to it.
--**LoadBalancer:** Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services are created automatically.-
+- **ClusterIP:** Exposes the Service on a cluster-internal IP. This type makes the Service only reachable from within the cluster.
+- **NodePort:** Exposes the Service on each Node's IP at a static port. A ClusterIP Service is created automatically, and the NodePort Service will route to it.
+- **LoadBalancer:** Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services are created automatically.-
