@@ -223,24 +223,24 @@ Using PersistentVolumes and PersistentVolumeClaims makes it easy to obtain persi
 
 StatefulSet is a Kubernetes workload API object used to manage stateful applications. Unlike Deployment and ReplicaSet, which are intended for stateless applications, StatefulSet is ideal for applications that require a stable, unique network identifier, persistent storage, and orderly, graceful deployment and scaling.
 
-  **Stable, Unique Network Identifiers:** Each pod in a StatefulSet derives its hostname from the name of the StatefulSet and the ordinal of the pod. The pattern for the constructed hostname is $(statefulset name)-$(ordinal). This ensures that each pod in a StatefulSet has a unique and predictable name, which is crucial for stateful applications like databases that rely on stable identifiers.
+  -**Stable, Unique Network Identifiers**: Each pod in a StatefulSet derives its hostname from the name of the StatefulSet and the ordinal of the pod. The pattern for the constructed hostname is $(statefulset name)-$(ordinal). This ensures that each pod in a StatefulSet has a unique and predictable name, which is crucial for stateful applications like databases that rely on stable identifiers.
 
-    **Stable, Persistent Storage:** StatefulSet allows you to assign PersistentVolumes to each pod via PersistentVolumeClaims. When a pod is (re)scheduled onto a node, its volume mount will have the same data as before, which is essential for stateful services that need to maintain their state across restarts.
+   - **Stable, Persistent Storage**: StatefulSet allows you to assign PersistentVolumes to each pod via PersistentVolumeClaims. When a pod is (re)scheduled onto a node, its volume mount will have the same data as before, which is essential for stateful services that need to maintain their state across restarts.
 
-    **Ordered, Graceful Deployment and Scaling:** Pods in a StatefulSet are created, scaled, and deleted in a predictable order. When scaling down, the pods are terminated in reverse ordinal order. This orderly execution is critical for stateful apps that require careful handling of startup and shutdown sequences.
+   - **Ordered, Graceful Deployment and Scaling**: Pods in a StatefulSet are created, scaled, and deleted in a predictable order. When scaling down, the pods are terminated in reverse ordinal order. This orderly execution is critical for stateful apps that require careful handling of startup and shutdown sequences.
 
-    **Ordered, Automated Rolling Updates:** When the StatefulSet’s pod template is updated, each pod is updated in reverse ordinal order, with the next pod updated only after the current pod is running and ready.
+   - **Ordered, Automated Rolling Updates**: When the StatefulSet’s pod template is updated, each pod is updated in reverse ordinal order, with the next pod updated only after the current pod is running and ready.
 	
 ## Kubernetes Services
 
 Kubernetes Services are an abstract way to expose an application running on a set of Pods as a network service. With Kubernetes, you don't need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes provides Pods with their own IP addresses and a single DNS name for a set of Pods and can load-balance across them.
 
-    **Service Discovery and Load Balancing:** Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods and can load-balance across them.
+- **Service Discovery and Load Balancing:** Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods and can load-balance across them.
 
-    **Stable Network Interface:** Services provide a stable IP address and port combination which remains consistent even as the pods they represent are updated or replaced.
+- **Stable Network Interface:** Services provide a stable IP address and port combination which remains consistent even as the pods they represent are updated or replaced.
 
-    ### Different Service Types:
+### Different Service Types:
 	
-        **ClusterIP:** Exposes the Service on a cluster-internal IP. This type makes the Service only reachable from within the cluster.
-        **NodePort:** Exposes the Service on each Node's IP at a static port. A ClusterIP Service is created automatically, and the NodePort Service will route to it.
-        **LoadBalancer:** Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services are created automatically.
+-**ClusterIP:** Exposes the Service on a cluster-internal IP. This type makes the Service only reachable from within the cluster.
+-**NodePort:** Exposes the Service on each Node's IP at a static port. A ClusterIP Service is created automatically, and the NodePort Service will route to it.
+-**LoadBalancer:** Exposes the Service externally using a cloud provider's load balancer. NodePort and ClusterIP Services are created automatically.-
